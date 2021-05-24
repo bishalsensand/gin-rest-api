@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: Gin REST API
+  description: 'API Doc for a quick REST API written in Gin Web Framework'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Source repository
+  url: https://github.com/bishalsensand/gin-rest-api/
+servers:
+- url: https://gin-rest-api-cgpqiyp2iq-ts.a.run.app
+tags:
+- name: entry
+  description: Everything about Entries
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+paths:
+  /entry:
+    post:
+      tags:
+      - entry
+      summary: Create a new entry
+      operationId: addEntry
+      requestBody:
+        description: Entry to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Entry'
+        required: true
+      responses:
+        400:
+          description: Invalid input
+          content: {}
+        200:
+          description: Successful
+    get:
+      tags:
+      - entry
+      summary: Get all entries
+      operationId: getEntries
+      responses:
+        200:
+          description: Successful
+  /entry/{entryId}:
+    get:
+      tags:
+      - entry
+      summary: Find entry with a given ID
+      operationId: getEntryById
+      parameters:
+      - name: entryId
+        in: path
+        description: ID of entry to return
+        required: true
+        schema:
+          type: string
+          example: "entryId"
+      responses:
+        200:
+          description: successful operation
+        
+components:
+  schemas:
+   
+    Entry:
+      required:
+      - account_name
+      - contact_name
+      - sales_rep
+      type: object
+      properties:
+        account_name:
+          type: string
+          example: "Test Account"
+        contact_name:
+          type: string
+          example: "Text Contact"
+        deal_size:
+          type: integer
+          format: int32
+        sales_rep:
+          type: string
+          example: "Example Sales Rep"
+        registered_webinar:
+          type: boolean
+        sales_call:
+          type: boolean
+        deal_status:
+          type: boolean

@@ -13,8 +13,8 @@ To deploy to Google Cloud, make sure you have a project that you have correct ac
 
 ```bash
 # Set env vars
-GCP_PROJECT_ID=<google-cloud-project>
-APP_BUILD_ID=<quick-rest-api>
+export GCP_PROJECT_ID=bishal-playground-313602
+export APP_BUILD_ID=gin-rest-api
 
 # build containerized image and push to google container registry
 gcloud builds submit --tag gcr.io/${GCP_PROJECT_ID}/${APP_BUILD_ID}

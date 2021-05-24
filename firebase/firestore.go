@@ -28,7 +28,7 @@ func createClient(ctx context.Context) *firestore.Client {
 	return client
 }
 
-func postJobToFirebase(entry Entry) (string, error) {
+func postEntryToFirebase(entry Entry) (string, error) {
 	ctx := context.Background()
 	client := createClient(ctx)
 	defer client.Close()
@@ -42,7 +42,7 @@ func postJobToFirebase(entry Entry) (string, error) {
 	return docRef.ID, nil
 }
 
-func getJobDetailsFromFirebase(entryId string) (*Entry, error) {
+func getEntryFromFirebase(entryId string) (*Entry, error) {
 	if entryId == "" {
 		return nil, fmt.Errorf("Entryid empty")
 	}

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
+	"github.com/bishalsensand/gin-rest-api/firebase"
 	"github.com/gin-gonic/gin"
-	"github.com/sensand/quick-rest-api/firebase"
 )
 
 func getEntries(c *gin.Context) {

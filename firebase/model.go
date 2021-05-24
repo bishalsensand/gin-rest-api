@@ -12,11 +12,11 @@ type Entry struct {
 }
 
 func (e Entry) CreateNew() (string, error) {
-	return postJobToFirebase(e)
+	return postEntryToFirebase(e)
 }
 
 func GetEntryById(id string) (*Entry, error) {
-	return getJobDetailsFromFirebase(id)
+	return getEntryFromFirebase(id)
 }
 
 func GetEntries(count int) ([]Entry, error) {

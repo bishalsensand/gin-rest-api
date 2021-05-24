@@ -1,5 +1,7 @@
 package firebase
 
-const serviceAccountKeyfilePath = "./secrets/key.json"
-const projectId = "bishal-playground-313602"
-const collectionName = "entries"
+import "os"
+
+var serviceAccountKeyfilePath = os.Getenv("SERVICE_ACCOUNT_KEY_FILE")
+var projectId = os.Getenv("GCP_PROJECT_ID")
+var collectionName = "entries"

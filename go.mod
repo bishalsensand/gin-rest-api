@@ -1,4 +1,4 @@
-module github.com/sensand/quick-rest-api
+module github.com/bishalsensand/gin-rest-api
 
 go 1.16
 

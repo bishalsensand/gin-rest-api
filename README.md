@@ -1,5 +1,5 @@
-# Quick and dirty REST API using gin
-This is an example of quick and incomplete REST API written in [Gin Web Framework](https://github.com/gin-gonic/gin)
+# Quick and dirty Firestore REST API using gin
+This is an example of quick and incomplete REST API written in [Gin Web Framework](https://github.com/gin-gonic/gin). The project uses [Google Cloud's Firestore](https://cloud.google.com/firestore) for data persistence.
 
 
 ## Configuring
@@ -19,7 +19,7 @@ To deploy to Google Cloud, make sure you have a project that you have correct ac
 
 ```bash
 # Set env vars
-export GCP_PROJECT_ID=bishal-playground-313602
+export GCP_PROJECT_ID=your-project-name
 export APP_BUILD_ID=gin-rest-api
 
 # build containerized image and push to google container registry

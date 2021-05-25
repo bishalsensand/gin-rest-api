@@ -16,8 +16,75 @@ tags:
   description: Everything about Entries
   externalDocs:
     description: Find out more
-    url: http://swagger.io
+    url: https://github.com/bishalsensand/gin-rest-api/
 paths:
+  /entry/{entryId}:
+    get:
+      tags:
+      - entry
+      summary: Find entry with a given ID
+      operationId: getEntryById
+      parameters:
+      - name: entryId
+        in: path
+        description: ID of entry to return
+        required: true
+        schema:
+          type: string
+          example: "entryId"
+      responses:
+        200:
+          description: Successful operation
+        404:
+          description: Not Found
+        503:
+          description: Internal Server Error
+    put:
+      tags:
+      - entry
+      summary: Update entry with a given ID
+      operationId: updateEntryById
+      parameters:
+      - name: entryId
+        in: path
+        description: ID of entry to update
+        required: true
+        schema:
+          type: string
+          example: "entryId"
+      requestBody:
+        description: Entry to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Entry'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+        404:
+          description: Not found
+        503:
+          description: Internal server error
+    delete:
+      tags:
+      - entry
+      summary: Delete entry with a given ID
+      operationId: deleteEntryById
+      parameters:
+      - name: entryId
+        in: path
+        description: ID of entry to delete
+        required: true
+        schema:
+          type: string
+          example: "entryId"
+      responses:
+        200:
+          description: Successful operation
+        503:
+          description: Internal server error
+
   /entry:
     post:
       tags:
@@ -36,7 +103,10 @@ paths:
           description: Invalid input
           content: {}
         200:
-          description: Successful
+          description: Successful Operation
+        503:
+          description: Internal Server Error
+
     get:
       tags:
       - entry
@@ -44,51 +114,21 @@ paths:
       operationId: getEntries
       responses:
         200:
-          description: Successful
-  /entry/{entryId}:
-    get:
-      tags:
-      - entry
-      summary: Find entry with a given ID
-      operationId: getEntryById
-      parameters:
-      - name: entryId
-        in: path
-        description: ID of entry to return
-        required: true
-        schema:
-          type: string
-          example: "entryId"
-      responses:
-        200:
-          description: successful operation
-    delete:
-      tags:
-      - entry
-      summary: Delete entry with a given ID
-      operationId: deleteEntryById
-      parameters:
-      - name: entryId
-        in: path
-        description: ID of entry to delete
-        required: true
-        schema:
-          type: string
-          example: "entryId"
-      responses:
-        200:
-          description: successful operation
-        500:
-          description: Internal server error
-        
+          description: Successful Operation
+        503:
+          description: Internal Server Error
+                
 components:
   schemas:
-   
     Entry:
       required:
       - account_name
       - contact_name
       - sales_rep
+      - deal_size
+      - registered_webinar
+      - sales_call
+      - deal_status
       type: object
       properties:
         account_name:

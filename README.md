@@ -3,7 +3,13 @@ This is an example of quick and incomplete REST API written in [Gin Web Framewor
 
 
 ## Configuring
+Access to firestore database is provided by using 2 environment variables. 
+
+- `SERVICE_ACCOUNT_KEY_FILE` is path to a json key file downloaded from firebase project. This variable is not required to be set when code is executing in Google cloud compute environment.
+- `GCP_PROJECT_ID` is the name of google cloud project the firestore databse lives in. This is a required config.
+
 See `firebase/config.go` for configuration options
+
 ## Running
 Run `go run .` to start a webserver in port `8080`. Routes defined in `main.go`.
 

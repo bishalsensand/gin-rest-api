@@ -8,6 +8,8 @@ import (
 	"cloud.google.com/go/firestore"
 	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func createClient(ctx context.Context) *firestore.Client {
@@ -33,7 +35,9 @@ func postEntryToFirebase(entry Entry) (string, error) {
 	client := createClient(ctx)
 	defer client.Close()
 
-	docRef, _, err := client.Collection(collectionName).Add(ctx, entry)
+	docRef, _, err := client.
+		Collection(collectionName).
+		Add(ctx, entry)
 
 	if err != nil {
 		return "", err
@@ -50,9 +54,18 @@ func getEntryFromFirebase(entryId string) (*Entry, error) {
 	client := createClient(ctx)
 	defer client.Close()
 
-	docSnapshot, err := client.Collection(collectionName).Doc(entryId).Get(ctx)
+	docSnapshot, err := client.
+		Collection(collectionName).
+		Doc(entryId).
+		Get(ctx)
 
 	if err != nil {
+
+		// Not found
+		if status.Code(err) == codes.NotFound {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -72,7 +85,7 @@ func getAllEntriesFromFirebase(count int) ([]Entry, error) {
 		Limit(count).
 		Documents(ctx)
 
-	var fetchedEntries []Entry
+	var fetchedEntries []Entry = []Entry{}
 
 	for {
 		doc, err := iter.Next()
@@ -91,4 +104,17 @@ func getAllEntriesFromFirebase(count int) ([]Entry, error) {
 		fetchedEntries = append(fetchedEntries, entry)
 	}
 	return fetchedEntries, nil
+}
+
+func deleteEntryById(id string) (bool, error) {
+	ctx := context.Background()
+	client := createClient(ctx)
+	defer client.Close()
+
+	_, err := client.
+		Collection(collectionName).
+		Doc(id).
+		Delete(ctx)
+
+	return (err == nil), err
 }

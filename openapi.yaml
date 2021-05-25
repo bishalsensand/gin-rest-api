@@ -62,6 +62,24 @@ paths:
       responses:
         200:
           description: successful operation
+    delete:
+      tags:
+      - entry
+      summary: Delete entry with a given ID
+      operationId: deleteEntryById
+      parameters:
+      - name: entryId
+        in: path
+        description: ID of entry to delete
+        required: true
+        schema:
+          type: string
+          example: "entryId"
+      responses:
+        200:
+          description: successful operation
+        500:
+          description: Internal server error
         
 components:
   schemas:

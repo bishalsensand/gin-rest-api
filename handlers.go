@@ -34,6 +34,15 @@ func getEntry(c *gin.Context) {
 		})
 		return
 	}
+
+	if entry == nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"success": false,
+			"message": "Could not find a matching entry",
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
 		"data":    entry,
@@ -42,10 +51,15 @@ func getEntry(c *gin.Context) {
 
 func deleteEntry(c *gin.Context) {
 	entryId := c.Param("id")
+	success, err := firebase.DeleteEntryById(entryId)
 
-	c.JSON(http.StatusNotImplemented, gin.H{
-		"success": false,
-		"entryId": entryId,
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"success": success,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"success": success,
 	})
 }
 

@@ -4,7 +4,7 @@ type Entry struct {
 	Id                string `json:"id" firestore:"id,omitempty"`
 	AccountName       string `json:"account_name" binding:"required"`
 	ContactName       string `json:"contact_name" binding:"required"`
-	DealSize          int    `json:"deal_size"`
+	DealSize          *int   `json:"deal_size" binding:"required"`
 	SalesRep          string `json:"sales_rep" binding:"required"`
 	RegisteredWebinar *bool  `json:"registered_webinar" binding:"required"`
 	SalesCall         *bool  `json:"sales_call" binding:"required"`
@@ -21,4 +21,8 @@ func GetEntryById(id string) (*Entry, error) {
 
 func GetEntries(count int) ([]Entry, error) {
 	return getAllEntriesFromFirebase(count)
+}
+
+func DeleteEntryById(id string) (bool, error) {
+	return deleteEntryById(id)
 }

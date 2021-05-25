@@ -10,7 +10,7 @@ externalDocs:
   description: Source repository
   url: https://github.com/bishalsensand/gin-rest-api/
 servers:
-- url: https://gin-rest-api-cgpqiyp2iq-ts.a.run.app
+- url: https://gin-rest-api
 tags:
 - name: entry
   description: Everything about Entries

@@ -7,11 +7,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/entry", getEntries)
-	r.POST("/entry", createEntry)
-	r.GET("/entry/:id", getEntry)
-	r.PUT("/entry/:id", putEntry)
-	r.DELETE("/entry/:id", deleteEntry)
+	r.GET("/isSensandEngineer", isSensandEngineer)
 
 	r.Run()
 }
